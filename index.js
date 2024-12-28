@@ -45,30 +45,36 @@ function Draw(){
         let x = canvas.width/2
         let y = canvas.height/2
         let lineWidth = 8
+        let angle = -Math.PI/2
+        let nx = 0
+        let ny = 0
      
 
-        c.save()
-        c.translate(x,y)
         c.beginPath()
         c.strokeStyle = "hsl(" + n % 360 * 10 + ",100%,50%)"
         
         for(var i = 0 ; i < sequence.length ; i++){
     
-            c.moveTo(0,0)
+            c.moveTo(x,y)
     
             if(sequence[i] % 2 === 0){
     
-                c.rotate(-Math.PI/7)
+               angle = angle + Math.PI/7
                 
             }else{
     
-                c.rotate(Math.PI/4)
+                angle = angle - Math.PI/4
             }
+
+            nx = x + len * Math.cos(angle)
+            ny = y + len * Math.sin(angle)
     
             c.lineWidth = lineWidth
-            c.lineTo(0 , -len)
+            c.lineTo(nx , ny)
             c.stroke()
-            c.translate(0 , -len)
+
+            x = nx 
+            y = ny
 
             lineWidth *= .9
     
